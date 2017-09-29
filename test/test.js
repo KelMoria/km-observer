@@ -6,7 +6,7 @@ var expect = require('chai').expect,
     should = require('chai').should(),
     sinon  = require('sinon'),
     nock   = require('nock'),
-    Probe  = require('../src/km.probe');
+    Observer  = require('../src/km.observer');
 
 const ENDPOINT         = 'http://mock.endpoint',
       SECURE_ENDPOINT  = 'https://mock.endpoint',
@@ -16,7 +16,7 @@ const ENDPOINT         = 'http://mock.endpoint',
 
 var nock_http, nock_https, nock_complex;
 
-describe('km.probe', function () {
+describe('km.observer', function () {
 
   before(function () {
     nock_http = nock(ENDPOINT)
@@ -36,48 +36,48 @@ describe('km.probe', function () {
   });
 
   it('is constructed with an endpoint', function () {
-    let probe = new Probe(ENDPOINT);
-    return probe.endpoint.should.equal(ENDPOINT);
+    let observer = new Observer(ENDPOINT);
+    return observer.endpoint.should.equal(ENDPOINT);
   });
 
   it('throws a TypeError when endpoint is not a string', function () {
-    let emptyConstructor = () => { new Probe() };
+    let emptyConstructor = () => { new Observer() };
     return emptyConstructor.should.throw(TypeError);
   });
 
   it('.deploy() returns a Promise', function () {
-    let probe = new Probe(ENDPOINT);
-    return probe.deploy().should.be.a('promise');
+    let observer = new Observer(ENDPOINT);
+    return observer.deploy().should.be.a('promise');
   });
 
   describe('can make requests via', function () {
     
     it('http', function () {
-      let probe = new Probe(ENDPOINT);
-      return probe.deploy().should.be.fulfilled;
+      let observer = new Observer(ENDPOINT);
+      return observer.deploy().should.be.fulfilled;
     });
 
     it('https', function () {
-      let probe = new Probe(SECURE_ENDPOINT);
-      return probe.deploy().should.be.fulfilled;
+      let observer = new Observer(SECURE_ENDPOINT);
+      return observer.deploy().should.be.fulfilled;
     });
 
   });
 
   it('can handle complex data', function () {
-    let probe = new Probe(COMPLEX_ENDPOINT);
-    return probe.deploy().should.become(COMPLEX_DATA);
+    let observer = new Observer(COMPLEX_ENDPOINT);
+    return observer.deploy().should.become(COMPLEX_DATA);
   });
 
   describe('formats resulting payload data', function () {
 
     it('raw, as-is (default)', function () {
-      let probe = new Probe(ENDPOINT);
-      return probe.deploy().should.become(SIMPLE_DATA);
+      let observer = new Observer(ENDPOINT);
+      return observer.deploy().should.become(SIMPLE_DATA);
     });
 
     it('to an optionally specified JSON format, recursively', function () {
-      let probe = new Probe(COMPLEX_ENDPOINT, {
+      let observer = new Observer(COMPLEX_ENDPOINT, {
         'should-be-bar': 'foo',
         'should-be-true': 'foo-true',
         'should-be-false': 'foo-false',
@@ -91,7 +91,7 @@ describe('km.probe', function () {
         'should-be-empty-array': 'foo-empty-array',
         'should-be-empty-object': 'foo-empty-object'
       });
-      return probe.deploy().should.become({
+      return observer.deploy().should.become({
         'should-be-bar': 'bar',
         'should-be-true': true,
         'should-be-false': false,
@@ -109,8 +109,8 @@ describe('km.probe', function () {
 
     it('optionally allows raw input to be exposed to a new key', function () {
       let format = { 'should-be-bar': 'foo', 'should-be-raw-payload': 'raw' },
-          probe  = new Probe(COMPLEX_ENDPOINT, format, 'raw');
-      return probe.deploy().should.become({
+          observer  = new Observer(COMPLEX_ENDPOINT, format, 'raw');
+      return observer.deploy().should.become({
         'should-be-bar': 'bar',
         'should-be-raw-payload': COMPLEX_DATA
       });

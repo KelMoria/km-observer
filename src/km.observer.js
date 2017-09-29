@@ -2,7 +2,7 @@
 
 var needle = require('needle');
 
-class Probe {
+class Observer {
   constructor(endpoint, format, raw) {
     if (typeof endpoint !== 'string') {
       throw new TypeError(`Endpoint must be a string. Got ${endpoint}`);
@@ -57,4 +57,4 @@ class Probe {
   }
 }
 
-module.exports = Probe;
+module.exports = Observer;
