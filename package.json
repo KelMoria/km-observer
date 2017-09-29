@@ -1,17 +1,22 @@
 {
   "name": "km-observer",
   "author": "Jim Toth",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Consumes and formats public REST API method payloads.",
   "repository": "https://github.com/jim-toth/km-observer.git",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build-js": "babel src --out-dir lib",
+    "prepublishOnly": "npm test && npm run build-js"
   },
   "dependencies": {
     "needle": "^2.0.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
     "mocha": "^3.5.3",

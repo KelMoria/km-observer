@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('./src/km.observer');
+module.exports = require('./lib/km.observer');
