@@ -1,7 +1,7 @@
 {
   "name": "km-observer",
   "author": "Jim Toth",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Consumes and formats public REST API method payloads.",
   "repository": "https://github.com/jim-toth/km-observer.git",
   "main": "index.js",
