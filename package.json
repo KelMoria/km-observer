@@ -1,9 +1,9 @@
 {
   "name": "km-observer",
   "author": "Jim Toth",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.1.0",
   "description": "Consumes and formats public REST API method payloads.",
+  "repository": "https://github.com/jim-toth/km-observer.git",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
