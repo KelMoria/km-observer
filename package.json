@@ -1,0 +1,15 @@
+{
+  "name": "km-probe",
+  "author": "Jim Toth",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KelMorian Probe.  Consumes and logs public REST APIs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3"
+  }
+}

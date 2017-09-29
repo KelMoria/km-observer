@@ -1,0 +1,18 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# misc
+npm-debug.log
+
+# tests
+/_test-output
+
+#System Files
+.DS_Store
+Thumbs.db
