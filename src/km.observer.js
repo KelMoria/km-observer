@@ -16,29 +16,23 @@ class Observer {
     return new Promise((resolve, reject) => {
       if (this.endpoint) {
         needle('get', this.endpoint)
-          .then(this._resolve(resolve))
-          .catch(this._reject(reject));
+          .then(this._resolve(resolve, reject))
+          .catch(error => reject(error));
       }
     });
   }
 
-  _resolve(response) {
-    return (resolve) => {
+  _resolve(resolve, reject) {
+    return (response) => {
       if (response.statusCode == 200) {
         if (this.format) {
-            resolve(this._format(response.body, resolve, reject));
+            resolve(this._format(response.body));
           } else {
             resolve(response.body);
           }
       } else {
-        this._reject({error: response.statusCode, response: response});
+        reject({error: response.statusCode, response: response});
       }
-    }
-  }
-
-  _reject(error) {
-    return (reject) => {
-      reject(error);
     }
   }
 
