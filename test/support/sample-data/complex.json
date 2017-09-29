@@ -1,0 +1,18 @@
+{
+  "foo": "bar",
+  "foo-true": true,
+  "foo-false": false,
+  "foo-int": 7,
+  "foo-float": 3.141519,
+  "foo-array": ["bar0", "bar1", "bar2"],
+  "foo-object": { "foo-object-foo": "foo-object-bar"},
+  "foo-recursive": {
+    "recursive1": {
+      "recursive2": "recursive3"
+    }
+  },
+  "foo-empty-string": "",
+  "foo-null": null,
+  "foo-empty-array": [],
+  "foo-empty-object": {}
+}

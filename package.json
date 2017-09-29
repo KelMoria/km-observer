@@ -3,7 +3,7 @@
   "author": "Jim Toth",
   "version": "1.0.0",
   "private": true,
-  "description": "Consumes and reformats public REST API method payloads.",
+  "description": "Consumes and formats public REST API method payloads.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
