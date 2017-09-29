@@ -15,26 +15,34 @@ class Observer {
   deploy() {
     return new Promise((resolve, reject) => {
       if (this.endpoint) {
-        needle.get(this.endpoint, this._resolve(resolve, reject));
+        needle('get', this.endpoint)
+          .then(this._resolve(resolve))
+          .catch(this._reject(reject));
       }
     });
   }
 
-  _resolve(resolve, reject) {
-    return (error, response) => {
-      if (!error && response.statusCode == 200) {
+  _resolve(response) {
+    return (resolve) => {
+      if (response.statusCode == 200) {
         if (this.format) {
-          this._format(response.body, resolve, reject);
-        } else {
-          resolve(response.body);
-        }
+            resolve(this._format(response.body, resolve, reject));
+          } else {
+            resolve(response.body);
+          }
       } else {
-        reject(error);
+        this._reject({error: response.statusCode, response: response});
       }
     }
   }
 
-  _format(data, resolve, reject) {
+  _reject(error) {
+    return (reject) => {
+      reject(error);
+    }
+  }
+
+  _format(data) {
     let payload = {}, key;
     for (key in this.format) {
       if (this.format[key] == this.raw) {
@@ -43,7 +51,7 @@ class Observer {
         payload[key] = this._deepest(this.format[key].split('.'), data);
       }
     }
-    resolve(payload);
+    return payload;
   }
 
   _deepest(r_keys, haystack) {
