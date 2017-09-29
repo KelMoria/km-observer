@@ -3,13 +3,19 @@
   "author": "Jim Toth",
   "version": "1.0.0",
   "private": true,
-  "description": "KelMorian Probe.  Consumes and logs public REST APIs.",
+  "description": "Consumes and reformats public REST API method payloads.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
+  "dependencies": {
+    "needle": "^2.0.1"
+  },
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^3.5.3"
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^3.5.3",
+    "nock": "^9.0.22",
+    "sinon": "^4.0.0"
   }
 }

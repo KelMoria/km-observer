@@ -1,5 +1,3 @@
 'use strict';
 
-var probe = require('src/km.probe');
-
-exports.handler = probe.handler;
+module.exports = require('./src/km.probe');
